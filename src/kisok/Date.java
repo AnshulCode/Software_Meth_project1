@@ -81,12 +81,12 @@ public class Date implements Comparable<Date> {
         return true;
     }
 
-    // compareTo implementation for date
+    // compareTo implementation for date returns -100000000 if either date is invalid
     public int compareTo(Date date){
+
         if(!this.isValid() || !date.isValid()){
             return -100000000;
         }
-
 
         return 0;
     }
