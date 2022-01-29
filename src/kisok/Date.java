@@ -7,12 +7,15 @@ public class Date implements Comparable<Date> {
     private int month;
     private int day;
 
+    // Date constuctor that accepts string date input
     public Date(String date){
         String a[] = date.split("/");
         this.year = Integer.parseInt(a[2]);
         this.month = Integer.parseInt(a[0]);
         this.day = Integer.parseInt(a[1]);
     }
+
+    // Auto sets date top current date
     public Date(){
         Calendar cal = Calendar.getInstance();
         java.util.Date today =  cal.getTime();
@@ -25,6 +28,7 @@ public class Date implements Comparable<Date> {
 
     }
 
+    // get/set methods for Day,Month, Year
     public void setDay(int day) {
         this.day = day;
     }
@@ -46,6 +50,7 @@ public class Date implements Comparable<Date> {
         return this.year;
     }
 
+    //checks if year is leap year
     public boolean isLeapYear(){
         if(this.year % 4 == 0){
             if(this.year % 100 == 0){
@@ -58,6 +63,8 @@ public class Date implements Comparable<Date> {
         return false;
 
     }
+
+    // checks if Date is valid
     public boolean isValid(){
         if(this.year <0 || this.month < 0 || this.day < 0  || this.month>12 || this.day >31){
             return false;
@@ -66,13 +73,15 @@ public class Date implements Comparable<Date> {
             if(this.day>29){
                 return false;
             }
-            return this.isLeapYear();
+            if(this.day == 29){
+               return this.isLeapYear();
+
+            }
         }
         return true;
     }
-    public int convertToDay() {
-        return 0;
-    }
+
+    // compareTo implementation for date
     public int compareTo(Date date){
         if(!this.isValid() || !date.isValid()){
             return -100000000;

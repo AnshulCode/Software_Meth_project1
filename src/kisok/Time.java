@@ -4,6 +4,7 @@ public class Time implements Comparable<Time>{
     private int hour;
     private int minute;
 
+    // checks if date is valid
     public boolean isValid(){
 
         if(hour > 24 || minute >= 60){
@@ -15,6 +16,8 @@ public class Time implements Comparable<Time>{
 
         return true;
     }
+
+    // get/set methods for Time Class
 
     public void setHour(int hour) {
         this.hour = hour;
@@ -32,6 +35,7 @@ public class Time implements Comparable<Time>{
         return this.hour;
     }
 
+    // turns Time to string
     @Override
     public String toString() {
 
@@ -41,6 +45,8 @@ public class Time implements Comparable<Time>{
         return result;
 
     }
+
+    // implementation for compareTo function for Comparable interface
     @Override
     public int compareTo(Time time) {
 
