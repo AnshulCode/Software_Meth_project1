@@ -25,17 +25,21 @@ public class Patient implements Comparable<Patient> {
     }
     public void setDob(String l) {
         Calendar cal = Calendar.getInstance();
-        java.util.Date today =  cal.getTime();
 
-        dob.setMonth(today.getMonth()+1);
-        dob.setDay(today.getDay() + 1);
-        dob.setYear(today.getYear()+1900);
+
+        dob.setMonth(cal.get(Calendar.MONTH));
+        dob.setDay(cal.get(Calendar.DAY_OF_MONTH));
+        dob.setYear(cal.get(Calendar.YEAR));
+    }
+    public Date getDob() {
+        return this.dob;
     }
 
     @Override
     public String toString() {
         return "";
     }
+
     @Override
     public int compareTo(Patient patient) {
         if(this.fname == patient.fname && this.lname == patient.lname && this.dob == patient.dob){

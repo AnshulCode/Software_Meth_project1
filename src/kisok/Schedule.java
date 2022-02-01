@@ -18,7 +18,6 @@ public class Schedule {
     public void print(){
 
     }
-
     public void printByZip(){
 
     }
