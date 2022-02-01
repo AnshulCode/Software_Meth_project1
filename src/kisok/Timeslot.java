@@ -3,7 +3,9 @@ package kisok;
 public class Timeslot implements Comparable<Timeslot> {
     private Time time;
     private Date date;
-
+    public Date getDate() {
+        return this.date;
+    }
     @Override
     public String toString() {
 

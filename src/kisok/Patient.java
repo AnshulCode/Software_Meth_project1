@@ -35,12 +35,12 @@ public class Patient implements Comparable<Patient> {
 
     @Override
     public String toString() {
-        return "";
+        return this.fname+" "+this.lname+","+" DOB: "+this.dob.toString()+",";
     }
 
     @Override
     public int compareTo(Patient patient) {
-        if(this.fname == patient.fname && this.lname == patient.lname && this.dob == patient.dob){
+        if(this.fname == patient.fname && this.lname == patient.lname && this.dob.compareTo(patient.dob) == 0){
             return 1;
         }
         return 0;
