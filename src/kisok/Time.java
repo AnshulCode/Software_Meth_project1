@@ -38,10 +38,23 @@ public class Time implements Comparable<Time>{
     // turns Time to string
     @Override
     public String toString() {
+        String minute = "";
+        if(this.minute>9){
+            minute = Integer.toString(this.minute);
+        }else{
+            minute = "0"+Integer.toString(this.minute);
+        }
 
-        String minute = Integer.toString(this.minute);
-        String hour = Integer.toString(this.hour);
-        String result = minute + ":" + hour;
+
+        String hour = "";
+
+        if(this.hour>9){
+            hour = Integer.toString(this.hour);
+        }else{
+            hour = "0"+Integer.toString(this.hour);
+        }
+
+        String result = hour + ":" + minute;
         return result;
 
     }

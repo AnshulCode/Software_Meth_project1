@@ -6,6 +6,11 @@ public class Timeslot implements Comparable<Timeslot> {
     public Date getDate() {
         return this.date;
     }
+
+    public Timeslot(Time t,Date d){
+        this.time = t;
+        this.date = d;
+    }
     @Override
     public String toString() {
 

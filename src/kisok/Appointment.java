@@ -49,7 +49,7 @@ public class Appointment {
             return "Invalid appointment";
         }
 
-        return patient.toString()+","+slot.toString()+location.MIDDLESEX;
+        return patient.toString()+","+slot.toString()+location.county+","+location.zip+","+location.cites;
     }
 
     @Override

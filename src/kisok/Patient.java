@@ -41,9 +41,9 @@ public class Patient implements Comparable<Patient> {
     @Override
     public int compareTo(Patient patient) {
         if(this.fname == patient.fname && this.lname == patient.lname && this.dob.compareTo(patient.dob) == 0){
-            return 1;
+            return 0;
         }
-        return 0;
+        return this.dob.compareTo(patient.dob);
     }
 
 }

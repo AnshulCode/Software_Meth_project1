@@ -8,7 +8,7 @@ public class Date implements Comparable<Date> {
     private int day;
 
 
-    // Date constuctor that accepts string date input, all fields zero if string is whack
+    // Date constructor that accepts string date input, all fields zero if string is whack
     public Date(String date){
         String a[] = date.split("/");
 
@@ -29,7 +29,7 @@ public class Date implements Comparable<Date> {
 
     }
 
-    // Auto sets date top current date
+    // Auto sets date top current date, default
     public Date(){
         Calendar cal = Calendar.getInstance();
 
@@ -101,6 +101,9 @@ public class Date implements Comparable<Date> {
 
         if(this.month <=2){
             this.year = this.year - 1;
+
+
+
             this.month = this.month +12;
         }
         return ((1461*this.year)/4)+((153*this.month)/5)+this.day;
