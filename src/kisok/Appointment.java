@@ -36,20 +36,27 @@ public class Appointment {
     public Appointment(){
 
     }
+    public Patient getPaitent() {
+        return this.patient;
+    }
+    public Location getLocation() {
+        return location;
+    }
     @Override
     public String toString(){
         if(patient == null){
             return "invalid location";
         }
         Date Current = new Date();
-        if(this.slot.getDate().compareTo(Current)<0){
+        if(this.slot.getDate().compareTo(Current)>0){
             return "invalid timeslot";
         }
-        if(patient.getDob().compareTo(Current)>0){
+        if(patient.getDob().compareTo(Current)>=0){
             return "Invalid appointment";
         }
+        Time lower = new Time();
 
-        return patient.toString()+","+slot.toString()+location.county+","+location.zip+","+location.cites;
+        return patient.toString()+" Appointment detail: "+slot.toString()+" "+location.cites+" "+location.zip+","+location.county;
     }
 
     @Override
