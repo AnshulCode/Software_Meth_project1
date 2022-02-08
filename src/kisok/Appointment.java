@@ -36,6 +36,11 @@ public class Appointment {
     public Appointment(){
 
     }
+
+    public Timeslot getSlot() {
+        return slot;
+    }
+
     public Patient getPaitent() {
         return this.patient;
     }
@@ -69,6 +74,6 @@ public class Appointment {
         }
         Appointment check = (Appointment)o;
 
-        return (this.patient == check.patient && this.location.equals(check.location) && this.slot == check.slot);
+        return (this.patient.equals(check.getPaitent()) && this.location == check.getLocation() && this.slot == check.getSlot());
     }
 }

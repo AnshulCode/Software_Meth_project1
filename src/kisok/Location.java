@@ -3,7 +3,7 @@ package kisok;
 //  presets for Location zip and city
 public enum Location {
     MORRIS("07960","Morristown","MORRIS"),
-    MIDDLESEX("08852","Piscataway","MIDDLESEX"),
+    MIDDLESEX("08854","Piscataway","MIDDLESEX"),
     SOMERSET("08807","Bridgewater","SOMERSET"),
     UNION("07083","Union","UNION"),
     MERCER("08542","Princeton", "MERCER");
