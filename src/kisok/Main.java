@@ -21,10 +21,10 @@ public class Main {
 
         Patient patient = new Patient();
 
-        patient.setFname("jon");
+        patient.setFname("john");
         patient.setLname("denver");
         patient.setDob("12/13/1970");
-        Date date2 = new Date("12/02/22");
+        Date date2 = new Date("12/10/22");
         Time t2 = new Time();
         t2.setMinute(10);
         t2.setHour(10);
@@ -36,13 +36,13 @@ public class Main {
 
         patient3.setFname("john");
         patient3.setLname("denver");
-        patient3.setDob("12/13/1967");
+        patient3.setDob("12/13/1970");
         Date date3= new Date("12/10/22");
         Time t3 = new Time();
         t3.setMinute(10);
         t3.setHour(10);
         Timeslot slot3 = new Timeslot(t3,date3);
-        Location l3 = Location.UNION;
+        Location l3 = Location.MIDDLESEX;
         Appointment test3 = new Appointment(patient3,slot3,l3.county);
 
 

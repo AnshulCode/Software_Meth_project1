@@ -8,24 +8,24 @@ public class Appointment {
     // constructor for Appointment
     public Appointment(Patient patient,Timeslot slot,String location){
 
-            if(location.equals(Location.MIDDLESEX.county)){
+            if(location.equalsIgnoreCase(Location.MIDDLESEX.county)){
                 this.location = Location.MIDDLESEX;
                 this.patient = patient;
                 this.slot = slot;
 
-            }else if(location.equals(Location.MERCER.county)){
+            }else if(location.equalsIgnoreCase(Location.MERCER.county)){
                 this.location = Location.MERCER;
                 this.patient = patient;
                 this.slot = slot;
-            }else if (location.equals(Location.MORRIS.county)) {
+            }else if (location.equalsIgnoreCase(Location.MORRIS.county)) {
                 this.location = Location.MERCER;
                 this.patient = patient;
                 this.slot = slot;
-            }else if (location.equals(Location.SOMERSET.county)) {
+            }else if (location.equalsIgnoreCase(Location.SOMERSET.county)) {
                 this.location = Location.MERCER;
                 this.patient = patient;
                 this.slot = slot;
-            }else if (location.equals(Location.UNION.county)) {
+            }else if (location.equalsIgnoreCase(Location.UNION.county)) {
                 this.location = Location.UNION;
                 this.patient = patient;
                 this.slot = slot;

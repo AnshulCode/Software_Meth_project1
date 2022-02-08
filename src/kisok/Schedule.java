@@ -88,10 +88,15 @@ public class Schedule {
                         if (Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())) < 15) {
                             return false;
                         }
+                    }else if(this.appointments[i].getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0){
+                        return false;
                     }
                 }
                 if (Integer.parseInt(this.appointments[i].getLocation().zip) == (Integer.parseInt(appt.getLocation().zip))) {
                     if (Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())) < 15) {
+                        return false;
+                    }
+                    if (this.appointments[i].getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0) {
                         return false;
                     }
                 }
