@@ -12,20 +12,26 @@ public class Date implements Comparable<Date> {
     public Date(String date){
         String a[] = date.split("/");
 
+        for(int i = 0; i<a.length; i++){
+            System.out.println(a[i]);
+        }
         // catches error in data is whack
         try {
             this.year = Integer.parseInt(a[2]);
             this.month = Integer.parseInt(a[0]);
             this.day = Integer.parseInt(a[1]);
         }catch (NumberFormatException e){
+            System.out.println(a.toString());
             this.year = 0;
             this.month = 0;
             this.day = 0;
         }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println(a.toString());
             this.year = 0;
             this.month = 0;
             this.day = 0;
         }
+        System.out.println("");
 
     }
 
@@ -117,11 +123,11 @@ public class Date implements Comparable<Date> {
 
     }
 
-    // compareTo implementation for date returns -100000000 if either date is invalid
+    // compareTo implementation for date returns Integer.MAX_VALUE if either date is invalid
     public int compareTo(Date date){
 
         if(!this.isValid() || !date.isValid()){
-            return -100000000;
+            return Integer.MAX_VALUE;
         }
         return this.toDays()-date.toDays();
     }

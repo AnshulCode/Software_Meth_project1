@@ -2,6 +2,8 @@ package kisok;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+
+
 public class Kiosk {
 
     private String input = "";
@@ -25,7 +27,7 @@ public class Kiosk {
             input = scan.nextLine();
             //System.out.println("command recived" + input);
 
-            commandCheck(input,schedule);
+            System.out.println(commandCheck(input,schedule));
 
         }
         System.out.print("Kiosk session ended");
@@ -38,22 +40,84 @@ public class Kiosk {
      * @param commandGiven This is the command given by the user in the console.
      */
     public String commandCheck(String commandGiven , Schedule s) {
-        String[] array = this.splitString(commandGiven);
-        if(array[0] != "Q" ||array[0] != "B" || array[0] !="CP" || array[0] != "C" || array[0] !="PZ" || array[0] !="PP" || array[0] !="P" ) {
-            return "Invalid Command\n";
-        }else if(array[0] != "B"  && s.isEmpty()){
-            return "Invalid Command\n";
+        if(commandGiven.isEmpty()){
+            return "Invalid Command !\n";
         }
-        String date = "";
-        String Fname = "";
-        String Lname = "";
-        String Location = "";
-        String dob= "";
+        String[] array = this.splitString(commandGiven);
+        if(!(array[0].equals("Q") ||array[0].equals("B") || array[0].equals("CP") || array[0].equals("C")  || array[0].equals("PZ")  || array[0].equals("PP") || array[0].equals("P") )) {
+            return "Invalid Command !\n";
+        }else if(!array[0].equals("B")  && s.isEmpty()){
+            return "Invalid Command !\n";
+        }
+
+        if ((array[0].equals("Q")||array[0].equals("P") ||array[0].equals("PP")|| array[0].equals("PZ") ) && array.length >1) {
+            return "Invalid Command !\n";
+        }
+        if(array[0].equals("B") ){
+            if(array.length !=7){
+                return "Invalid Command !\n";
+            }
+
+            String DOB = array[1];
+            String fname = array[2];
+            String lname = array[3];
+            String appointmentDate = array[4];
+            String appointmentTime = array[5];
+            String location = array[6];
+            Date dob = new Date(DOB);
+
+
+            Date curr = new Date();
+            if(dob.compareTo(curr) >= 0){
+                return "Date Birth Invalid -> it is a future date";
+            }
+            Date appt = new Date(appointmentDate);
+            if(appt.compareTo(curr) <0){
+                return "Appointment date invalid -> it is a future date";
+
+            }
+            Patient p = new Patient(fname,lname,DOB);
+            //System.out.println(p.toString());
+            Time t = new Time(appointmentTime);
+            Date a = new Date(appointmentDate);
+            Timeslot ts = new Timeslot(t,a);
+            Appointment add = new Appointment(p,ts,location);
+            System.out.println(add.toString());
+
+            if(add.getLocation() == null){
+                return "Invalid Location!";
+            }
+            if(!add.getSlot().getDate().isValid()){
+                return "Invalid appointment date!";
+            }
+            System.out.println(s.isThere(add));
+            if(s.isThere(add)){
+                return "Same Appointment exists in the schedule!";
+            }
+            if(s.add(add)) {
+                return "Appointment booked and added to the schedule";
+            }
+            return "Appointment Failed";
+
+        }
+        if(array[0].equals("P")){
+            s.print();
+            return "";
+        }
+        if(array[0].equals("PZ")){
+            s.printByZip();
+            return "";
+        }
+        if(array[0].equals("PP")){
+            s.printByPatient();
+            return "";
+        }
 
 
 
 
-        return "";
+
+        return "Valid command";
     }
 
     /**

@@ -55,27 +55,27 @@ public class Schedule {
         return true;
     }
 
-    public boolean removeAll(Appointment appt) {
-        int flag = 0;
-        while (this.find(appt) != -1) {
-            this.remove(appt);
-            flag = 1;
+
+    public boolean isThere(Appointment appt){
+        for (int i = 0; i < this.numAppts; i++) {
+            if (this.appointments[i] != null) {
+                if (this.appointments[i].equals(appt)) {
+                    return true;
+                }
+            }
         }
-        if (flag == 0) {
-            return false;
-        }
-        return true;
+        return false;
     }
 
     public boolean add(Appointment appt) {
 
-
+        System.out.println(this.find(appt));
         if (this.find(appt) != NOT_FOUND) {
-            System.out.println("exists");
+
             return false;
         }
         Date current = new Date();
-        if (appt.getSlot().getDate().compareTo(current) > 0) {
+        if (appt.getSlot().getDate().compareTo(current) < 0) {
             return false;
         }
         Time upper = new Time(9, 0);

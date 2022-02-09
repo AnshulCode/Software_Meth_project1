@@ -53,11 +53,8 @@ public class Appointment {
             return "invalid location";
         }
         Date Current = new Date();
-        if(this.slot.getDate().compareTo(Current)>0){
+        if(this.slot.getDate().compareTo(Current)<0){
             return "invalid timeslot";
-        }
-        if(patient.getDob().compareTo(Current)>=0){
-            return "Invalid appointment";
         }
         Time lower = new Time();
 
@@ -74,6 +71,6 @@ public class Appointment {
         }
         Appointment check = (Appointment)o;
 
-        return (this.patient.equals(check.getPaitent()) && this.location == check.getLocation() && this.slot == check.getSlot());
+        return (this.patient.equals(check.getPaitent()) && this.location.county.equals(check.getLocation().county) && this.slot.compareTo(check.getSlot()) == 0);
     }
 }
