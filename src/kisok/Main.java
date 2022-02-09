@@ -3,6 +3,7 @@ package kisok;
 public class Main {
 
     public static void main(String[] args) {
+        /*
         Schedule s = new Schedule();
 
         Patient patient2 = new Patient();
@@ -54,7 +55,10 @@ public class Main {
 
         s.printByPatient();
 
+        */
 
+        Kiosk k = new Kiosk();
+        k.run();
 
     }
 }
