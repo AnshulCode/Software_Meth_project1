@@ -5,6 +5,10 @@ public class Schedule {
     private int numAppts;
     private final int NOT_FOUND = -1;
 
+    public boolean isEmpty(){
+        return (numAppts == 0);
+    }
+
     private int find(Appointment appt) {
         for (int i = 0; i < this.numAppts; i++) {
             if (this.appointments[i] != null) {

@@ -16,6 +16,22 @@ public class Time implements Comparable<Time>{
 
         return true;
     }
+    public Time(String time){
+        String a[] = time.split(":");
+        try {
+            this.hour= Integer.parseInt(a[0]);
+            this.minute = Integer.parseInt(a[1]);
+
+        }catch (NumberFormatException e){
+            this.hour = -1;
+            this.minute = -1;
+
+        }catch(ArrayIndexOutOfBoundsException e){
+            this.hour = -1;
+            this.minute = -1;
+
+        }
+    }
     public Time(){
 
     }

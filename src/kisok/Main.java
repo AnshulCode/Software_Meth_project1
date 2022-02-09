@@ -33,7 +33,7 @@ public class Main {
         Location l2 = Location.UNION;
         Appointment test2 = new Appointment(patient,slot2,l2.county);
 
-        Patient patient3 = new Patient();
+        Patient patient3 = new Patient("john","denver","12/13/1970");
 
         patient3.setFname("john");
         patient3.setLname("denver");

@@ -13,6 +13,12 @@ public class Patient implements Comparable<Patient> {
     public void setLname(String l){
         this.lname = l;
     }
+    public Patient(String fname,String lname,String dob){
+        this.fname = fname;
+        this.lname = lname;
+        this.dob = new Date(dob);
+    }
+
     public String getLname() {
         return this.lname;
     }
