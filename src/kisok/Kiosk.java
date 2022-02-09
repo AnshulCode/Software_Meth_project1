@@ -65,24 +65,25 @@ public class Kiosk {
             String appointmentTime = array[5];
             String location = array[6];
             Date dob = new Date(DOB);
-
+            System.out.println(dob.toString());
 
             Date curr = new Date();
             if(dob.compareTo(curr) >= 0){
                 return "Date Birth Invalid -> it is a future date";
             }
             Date appt = new Date(appointmentDate);
+            System.out.println(appt.toString());
             if(appt.compareTo(curr) <0){
                 return "Appointment date invalid -> it is a future date";
 
             }
             Patient p = new Patient(fname,lname,DOB);
-            //System.out.println(p.toString());
+
             Time t = new Time(appointmentTime);
             Date a = new Date(appointmentDate);
             Timeslot ts = new Timeslot(t,a);
             Appointment add = new Appointment(p,ts,location);
-            System.out.println(add.toString());
+
 
             if(add.getLocation() == null){
                 return "Invalid Location!";
@@ -90,7 +91,7 @@ public class Kiosk {
             if(!add.getSlot().getDate().isValid()){
                 return "Invalid appointment date!";
             }
-            System.out.println(s.isThere(add));
+
             if(s.isThere(add)){
                 return "Same Appointment exists in the schedule!";
             }
@@ -98,6 +99,74 @@ public class Kiosk {
                 return "Appointment booked and added to the schedule";
             }
             return "Appointment Failed";
+
+        }
+        if(array[0].equals("C")){
+            if(array.length !=7){
+                return "Invalid Command !\n";
+            }
+
+            String DOB = array[1];
+            String fname = array[2];
+            String lname = array[3];
+            String appointmentDate = array[4];
+            String appointmentTime = array[5];
+            String location = array[6];
+            Date dob = new Date(DOB);
+            if(!dob.isValid()){
+                return "Invalid DOB";
+            }
+
+
+
+            Date curr = new Date();
+            if(dob.compareTo(curr) >= 0){
+                return "Date Birth Invalid -> it is a future date";
+            }
+            Date appt = new Date(appointmentDate);
+            if(!appt.isValid()){
+                return "Invalid Appointment";
+            }
+            if(appt.compareTo(curr) <0){
+                return "Appointment date invalid -> it is a future date";
+
+            }
+            Patient p = new Patient(fname,lname,DOB);
+
+            Time t = new Time(appointmentTime);
+            Date a = new Date(appointmentDate);
+            Timeslot ts = new Timeslot(t,a);
+            Appointment rm = new Appointment(p,ts,location);
+
+
+            if(rm.getLocation() == null){
+                return "Invalid Location!";
+            }
+            if(!rm.getSlot().getDate().isValid()){
+                return "Invalid appointment date!";
+            }
+            if(s.remove(rm)) {
+                return "Appointment booked and added to the schedule";
+            }else{
+                return "Appointment does not exist in schedule";
+            }
+
+        }
+        if(array[0].equals("CP")){
+            if(array.length != 4 ){
+                return "Invalid Command!";
+            }
+            String DOB = array[1];
+            String fname = array[2];
+            String lname = array[3];
+            Date d =new Date(DOB);
+            Patient p = new Patient(fname,lname,DOB);
+            System.out.println(p.toString());
+            Appointment check = new Appointment(p);
+            if(s.removeAll(check)){
+                return "Patient Does not exist";
+            }
+            return "Canceled all appointemnts for  "+" "+DOB+" "+fname+" "+lname;
 
         }
         if(array[0].equals("P")){
@@ -112,9 +181,6 @@ public class Kiosk {
             s.printByPatient();
             return "";
         }
-
-
-
 
 
         return "Valid command";

@@ -12,26 +12,26 @@ public class Date implements Comparable<Date> {
     public Date(String date){
         String a[] = date.split("/");
 
-        for(int i = 0; i<a.length; i++){
-            System.out.println(a[i]);
-        }
+
         // catches error in data is whack
         try {
+
             this.year = Integer.parseInt(a[2]);
             this.month = Integer.parseInt(a[0]);
             this.day = Integer.parseInt(a[1]);
+            System.out.println(this.getMonth());
         }catch (NumberFormatException e){
-            System.out.println(a.toString());
+
             this.year = 0;
             this.month = 0;
             this.day = 0;
         }catch(ArrayIndexOutOfBoundsException e){
-            System.out.println(a.toString());
+
             this.year = 0;
             this.month = 0;
             this.day = 0;
         }
-        System.out.println("");
+
 
     }
 
@@ -50,16 +50,7 @@ public class Date implements Comparable<Date> {
     }
 
     // get/set methods for Day,Month, Year
-    public void setDay(int day) {
-        this.day = day;
-    }
 
-    public void setYear(int year) {
-        this.year = year;
-    }
-    public void setMonth(int month) {
-        this.month = month;
-    }
 
     public int getDay() {
         return this.day;
@@ -104,21 +95,20 @@ public class Date implements Comparable<Date> {
 
     // converts the date to days
     public int toDays(){
-
+        int year = this.year;
+        int month = this.month;
         if(this.month <=2){
-            this.year = this.year - 1;
-
-
-
-            this.month = this.month +12;
+            year = year - 1;
+            month = month +12;
         }
-        return ((1461*this.year)/4)+((153*this.month)/5)+this.day;
+        return ((1461*year)/4)+((153*month)/5)+this.day;
 
     }
 
     @Override
     public String toString() {
         String dateStr = Integer.toString(this.month)+"/"+Integer.toString(this.day)+"/"+Integer.toString(this.year);
+
         return dateStr;
 
     }

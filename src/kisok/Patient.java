@@ -26,12 +26,7 @@ public class Patient implements Comparable<Patient> {
     public String getFname() {
         return this.fname;
     }
-    public void setDob(){
-        Calendar cal = Calendar.getInstance();
-        dob.setMonth(cal.get(Calendar.MONTH));
-        dob.setDay(cal.get(Calendar.DAY_OF_MONTH));
-        dob.setYear(cal.get(Calendar.YEAR));
-    }
+
     public void setDob(String l) {
         this.dob = new Date(l);
     }

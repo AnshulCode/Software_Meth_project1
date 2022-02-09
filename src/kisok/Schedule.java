@@ -1,5 +1,7 @@
 package kisok;
 
+
+
 public class Schedule {
     private Appointment[] appointments;
     private int numAppts;
@@ -36,11 +38,34 @@ public class Schedule {
         }
     }
 
+    public boolean removeAll(Appointment appt){
+        Appointment[] del = new Appointment[this.appointments.length];
+        for (int i = 0; i < del.length; i++) {
+            if(this.appointments[i] != null) {
+                if (this.appointments[i].getPaitent().equals(appt.getPaitent())) {
+                    del[i] = this.appointments[i];
+                }
+            }
+        }
+        boolean d = false;
+        for (int i = 0; i < del.length; i++) {
+            if(del[i]!= null){
+                boolean removed = this.remove(del[i]);
+                if(!removed){
+                    d = true;
+                }
+            }
+        }
+        if(!d){
+            return false;
+        }
+
+        return true;
+    }
     public boolean remove(Appointment appt) {
         if (this.find(appt) == NOT_FOUND || this.numAppts == 0) {
             return false;
         }
-        System.out.println("Remove at " + this.find(appt));
 
         int index_found = this.find(appt);
         this.appointments[index_found] = null;
@@ -49,7 +74,7 @@ public class Schedule {
             this.appointments[i - 1] = this.appointments[i];
         }
         numAppts -= 1;
-        System.out.println("Num of appointments: " + numAppts);
+
 
 
         return true;
@@ -68,10 +93,7 @@ public class Schedule {
     }
 
     public boolean add(Appointment appt) {
-
-        System.out.println(this.find(appt));
         if (this.find(appt) != NOT_FOUND) {
-
             return false;
         }
         Date current = new Date();
@@ -80,7 +102,7 @@ public class Schedule {
         }
         Time upper = new Time(9, 0);
         Time lower = new Time(16, 45);
-        if (appt.getSlot().getTime().compareTo(upper) < 0 || appt.getSlot().getTime().compareTo(lower) > 0) {
+        if (appt.getSlot().getTime().compareTo(upper) < 15 || appt.getSlot().getTime().compareTo(lower) > 0) {
             return false;
         }
 

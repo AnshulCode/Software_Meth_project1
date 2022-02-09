@@ -18,11 +18,11 @@ public class Appointment {
                 this.patient = patient;
                 this.slot = slot;
             }else if (location.equalsIgnoreCase(Location.MORRIS.county)) {
-                this.location = Location.MERCER;
+                this.location = Location.MORRIS;
                 this.patient = patient;
                 this.slot = slot;
             }else if (location.equalsIgnoreCase(Location.SOMERSET.county)) {
-                this.location = Location.MERCER;
+                this.location = Location.SOMERSET;
                 this.patient = patient;
                 this.slot = slot;
             }else if (location.equalsIgnoreCase(Location.UNION.county)) {
@@ -30,7 +30,11 @@ public class Appointment {
                 this.patient = patient;
                 this.slot = slot;
             }
-
+    }
+    public Appointment(Patient patient) {
+        this.patient = patient;
+        this.slot = null;
+        this.location = Location.UNION;
     }
     //base constructor
     public Appointment(){
