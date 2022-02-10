@@ -71,9 +71,12 @@ public class Kiosk {
             Date dob = new Date(DOB);
 
             if(!dob.isValid()){
-                return "Date of Birth Invalid";
+                return "Invalid date of birth";
             }
 
+            if(!dob.isValid()){
+                return "Invalid date of birth";
+            }
             Date curr = new Date();
 
             Date appt = new Date(appointmentDate);
@@ -82,7 +85,7 @@ public class Kiosk {
             }
 
             if(appt.compareTo(curr) <0){
-                return "Appointment date invalid -> it is a future date";
+                return "Appointment date invalid -> it must be a future date";
 
             }
             Patient p = new Patient(fname,lname,DOB);
@@ -118,21 +121,20 @@ public class Kiosk {
             String location = array[6];
             Date dob = new Date(DOB);
             if(!dob.isValid()){
-                return "Invalid DOB";
+                return "Invalid date of birth";
             }
 
 
 
             Date curr = new Date();
-            if(dob.compareTo(curr) >= 0){
-                return "Date Birth Invalid -> it is a future date";
-            }
+
+
             Date appt = new Date(appointmentDate);
             if(!appt.isValid()){
-                return "Invalid Appointment";
+                return "Invalid Appointment date";
             }
             if(appt.compareTo(curr) <0){
-                return "Appointment date invalid -> it is a future date";
+                return "Appointment date invalid -> must be a future date";
 
             }
             Patient p = new Patient(fname,lname,DOB);

@@ -9,6 +9,9 @@ public class Date implements Comparable<Date> {
     private int year;
     private int month;
     private int day;
+    public static final int QUADRENNIAL = 4;
+    public static final int CENTENNIAL = 100;
+    public static final int QUATERCENTENNIAL = 400;
 
 
     /**
@@ -30,9 +33,9 @@ public class Date implements Comparable<Date> {
 
         }catch (NumberFormatException e){
 
-            this.year = 0;
-            this.month = 0;
-            this.day = 0;
+            this.year = QUADRENNIAL;
+            this.month = QUATERCENTENNIAL;
+            this.day = CENTENNIAL;
         }catch(ArrayIndexOutOfBoundsException e){
 
             this.year = 0;
@@ -97,13 +100,11 @@ public class Date implements Comparable<Date> {
      */
 //checks if year is leap year
     public boolean isLeapYear(){
-        if(this.year % 4 == 0){
-            if(this.year % 100 == 0){
-                if(this.year % 400 == 0){
-                    return true;
-                }
+        if(this.year % QUADRENNIAL == 0 || this.year % QUATERCENTENNIAL == 0 ){
+            if(this.year % CENTENNIAL != 0){
+                return true;
             }
-            return false;
+
         }
         return false;
 
@@ -127,6 +128,7 @@ public class Date implements Comparable<Date> {
                return this.isLeapYear();
 
             }
+            return true;
         }
         if(this.month == 4 || this.month  == 6 || this.month == 9 || this.month == 11){
             if(this.day>30){

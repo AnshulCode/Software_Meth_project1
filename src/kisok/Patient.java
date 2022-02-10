@@ -33,7 +33,7 @@ public class Patient implements Comparable<Patient> {
      *
      * @param fname the fname
      * @param lname the lname
-     * @param dob   the dob
+     * @param dob   the date of birth in string format, creates date with date object
      */
     public Patient(String fname,String lname,String dob){
         this.fname = fname;
@@ -42,7 +42,7 @@ public class Patient implements Comparable<Patient> {
     }
 
     /**
-     * Gets lname.
+     * Gets last name.
      *
      * @return the lname
      */
@@ -51,7 +51,7 @@ public class Patient implements Comparable<Patient> {
     }
 
     /**
-     * Gets fname.
+     * Gets first name .
      *
      * @return the fname
      */
@@ -60,7 +60,7 @@ public class Patient implements Comparable<Patient> {
     }
 
     /**
-     * Sets dob.
+     * Sets date of birth.
      *
      * @param l the l
      */
@@ -69,7 +69,7 @@ public class Patient implements Comparable<Patient> {
     }
 
     /**
-     * Gets dob.
+     * Gets date of birth
      *
      * @return the dob
      */
@@ -77,10 +77,20 @@ public class Patient implements Comparable<Patient> {
         return this.dob;
     }
 
+    /**
+     * Converts Patient to readable format
+     * @return Patient information in readable string
+     */
     @Override
     public String toString() {
         return this.fname+" "+this.lname+","+" DOB: "+this.dob.toString()+",";
     }
+
+    /**
+     *
+     * @param patient
+     * @return compare patient. If lname+fname not equal, return Integer.MAX_VALUE, else return difference of Date of birth
+     */
 
     @Override
     public int compareTo(Patient patient) {
@@ -95,6 +105,11 @@ public class Patient implements Comparable<Patient> {
 
     }
 
+    /**
+     *
+     * @param o cast as Patient
+     * @return True if equal
+     */
     @Override
     public boolean equals(Object o){
         if(o == null){

@@ -194,10 +194,14 @@ public class Schedule {
      * @return
      */
      public String whyAddFailed(Appointment appt) {
+         Date current = new Date();
+         if(appt.getPaitent().getDob().compareTo(current) >= 0){
+             return "Date of Birth Invalid -> it is a future date";
+         }
          if (this.find(appt) != NOT_FOUND) {
              return "Appointment already exists in the schedule";
          }
-         Date current = new Date();
+
          if (appt.getSlot().getDate().compareTo(current) < 0) {
              return "Appointment date invalid -> must be a future date";
          }
