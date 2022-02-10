@@ -1,16 +1,28 @@
 package kisok;
 
 
-
+/**
+ * The type Schedule.
+ */
 public class Schedule {
     private Appointment[] appointments;
     private int numAppts;
     private final int NOT_FOUND = -1;
 
+    /**
+     * check if array is empty
+     *
+     * @return True if empty, false otherwise
+     */
     public boolean isEmpty(){
         return (numAppts == 0);
     }
 
+    /**
+     *
+     * @param appt
+     * @return index if found, -1 if not found
+     */
     private int find(Appointment appt) {
         for (int i = 0; i < this.numAppts; i++) {
             if (this.appointments[i] != null) {
@@ -22,12 +34,18 @@ public class Schedule {
         return NOT_FOUND;
     }
 
+    /**
+     * Initializes Schedule
+     */
     public Schedule() {
         this.appointments = new Appointment[0];
         this.numAppts = 0;
 
     }
 
+    /**
+     * Grows the array size when numAppts == appointments.length
+     */
     private void grow() {
         if (this.numAppts == this.appointments.length) {
             Appointment[] newAppts = new Appointment[this.numAppts + 4];
@@ -38,6 +56,12 @@ public class Schedule {
         }
     }
 
+    /**
+     * Remove all boolean.
+     *
+     * @param appt the appt
+     * @return boolean , True if removed All instances of Patient. False if nothing is removed
+     */
     public boolean removeAll(Appointment appt){
         Appointment[] del = new Appointment[this.appointments.length];
         for (int i = 0; i < del.length; i++) {
@@ -62,6 +86,13 @@ public class Schedule {
 
         return true;
     }
+
+    /**
+     * Removes appointment from list
+     *
+     * @param appt the appt
+     * @return False if appointment not found or array is empty
+     */
     public boolean remove(Appointment appt) {
         if (this.find(appt) == NOT_FOUND || this.numAppts == 0) {
             return false;
@@ -80,7 +111,12 @@ public class Schedule {
         return true;
     }
 
-
+    /**
+     * Checks is appointment is in array, this is for public use
+     *
+     * @param appt the appt
+     * @return True if appointment is there, false otherwise
+     */
     public boolean isThere(Appointment appt){
         for (int i = 0; i < this.numAppts; i++) {
             if (this.appointments[i] != null) {
@@ -92,19 +128,25 @@ public class Schedule {
         return false;
     }
 
+    /**
+     * Adds appointment to schedule
+     *
+     * @param appt the appt
+     * @return True if sucessful , false otherwise
+     */
     public boolean add(Appointment appt) {
         if (this.find(appt) != NOT_FOUND) {
             return false;
         }
         Date current = new Date();
         if (appt.getSlot().getDate().compareTo(current) < 0) {
-            System.out.println("Date Fallacyt");
+
             return false;
         }
         Time upper = new Time(9, 0);
         Time lower = new Time(16, 45);
         if (appt.getSlot().getTime().compareTo(upper) < 15 || appt.getSlot().getTime().compareTo(lower) > 0) {
-            System.out.println("Date Wrong");
+
             return false;
         }
 
@@ -114,18 +156,17 @@ public class Schedule {
                 if (appt.getPaitent().equals(this.appointments[i].getPaitent())) {
                     if (Integer.parseInt(this.appointments[i].getLocation().zip) == (Integer.parseInt(appt.getLocation().zip))) {
                         if (Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())) < 15) {
-                            System.out.println("15 min fault");
+
                             return false;
                         }
                     }else if(this.appointments[i].getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0){
-                        System.out.println("15 min fault 2");
+
                         return false;
                     }
                 }
                 if (Integer.parseInt(this.appointments[i].getLocation().zip) == (Integer.parseInt(appt.getLocation().zip))) {
-                    System.out.println("Compare TO" +Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())));
+                    //System.out.println("Compare TO" +Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())));
                     if (Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())) < 15) {
-                        System.out.println("15 min fault 3");
                         return false;
                     }
                 }
@@ -147,8 +188,64 @@ public class Schedule {
         return true;
     }
 
-    public void print() {
+    /**
+     * Prints error messages for add
+     * @param appt
+     * @return
+     */
+     public String whyAddFailed(Appointment appt) {
+         if (this.find(appt) != NOT_FOUND) {
+             return "Appointment already exists in the schedule";
+         }
+         Date current = new Date();
+         if (appt.getSlot().getDate().compareTo(current) < 0) {
+             return "Appointment date invalid -> must be a future date";
+         }
+         Time upper = new Time(9, 0);
+         Time lower = new Time(16, 45);
+         if (appt.getSlot().getTime().compareTo(upper) < 15 || appt.getSlot().getTime().compareTo(lower) > 0) {
 
+             return "Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.";
+         }
+
+
+         for (int i = 0; i < this.appointments.length; i++) {
+             if (this.appointments[i] != null) {
+                 if (appt.getPaitent().equals(this.appointments[i].getPaitent())) {
+                     if (Integer.parseInt(this.appointments[i].getLocation().zip) == (Integer.parseInt(appt.getLocation().zip))) {
+
+                         if (Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())) < 15) {
+                            if(Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot()))  == 0){
+                                return "Time slot has been taken at this location.";
+                            }
+                             return "Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.";
+                         }
+                     } else if (this.appointments[i].getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0) {
+                         return "Same patient cannot book an appointment with the same date.";
+                     }
+                 }
+                 if (Integer.parseInt(this.appointments[i].getLocation().zip) == (Integer.parseInt(appt.getLocation().zip))) {
+                     //System.out.println("Compare TO" +Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())));
+                     if (Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())) < 15) {
+                         if(Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot()))  == 0){
+                             return "Time slot has been taken at this location.";
+                         }
+                         return "Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.";
+                     }
+                 }
+             }
+
+
+         }
+         return "";
+     }
+
+
+    /**
+     * Prints all appointments in list
+     */
+    public void print() {
+        System.out.println("*list of appointments in the schedule*");
         for (int i = 0; i < this.appointments.length; i++) {
             if (this.appointments[i] != null) {
                 System.out.println(this.appointments[i].toString());
@@ -157,8 +254,12 @@ public class Schedule {
 
 
         }
+        System.out.print("*end of list");
     }
 
+    /**
+     * Prints appointments by zip and Timeslot
+     */
     public void printByZip() {
         for (int i = 0; i < this.numAppts; i++) {
             int swap = 0;
@@ -185,9 +286,21 @@ public class Schedule {
                 break;
             }
         }
-        this.print();
+        System.out.println("*list of appointments by zip and timeslot");
+        for (int i = 0; i < this.appointments.length; i++) {
+            if (this.appointments[i] != null) {
+                System.out.println(this.appointments[i].toString());
+
+            }
+
+
+        }
+        System.out.print("*end of list");
     }
 
+    /**
+     * Print by patient's last name, then by first name then by date of birth
+     */
     public void printByPatient() {
         for (int i = 0; i < this.numAppts; i++) {
             int swap = 0;
@@ -225,7 +338,16 @@ public class Schedule {
 
         }
 
-        this.print();
+        System.out.println("*list of appointments by patient*");
+        for (int i = 0; i < this.appointments.length; i++) {
+            if (this.appointments[i] != null) {
+                System.out.println(this.appointments[i].toString());
+
+            }
+
+
+        }
+        System.out.print("*end of list");
 
     }
 

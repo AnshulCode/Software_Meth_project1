@@ -1,11 +1,21 @@
 package kisok;
 
+/**
+ * The type Appointment.
+ */
 public class Appointment {
     private Patient patient;
     private Timeslot slot;
     private Location location;
 
-    // constructor for Appointment
+    /**
+     * Instantiates a new Appointment.
+     *
+     * @param patient  the patient
+     * @param slot     the slot
+     * @param location the location
+     */
+// constructor for Appointment
     public Appointment(Patient patient,Timeslot slot,String location){
 
             if(location.equalsIgnoreCase(Location.MIDDLESEX.county)){
@@ -31,23 +41,49 @@ public class Appointment {
                 this.slot = slot;
             }
     }
+
+    /**
+     * Instantiates a new Appointment.
+     *
+     * @param patient the patient
+     */
     public Appointment(Patient patient) {
         this.patient = patient;
         this.slot = null;
         this.location = Location.UNION;
     }
-    //base constructor
+
+    /**
+     * Instantiates a new Appointment.
+     */
+//base constructor
     public Appointment(){
 
     }
 
+    /**
+     * Gets slot.
+     *
+     * @return the slot
+     */
     public Timeslot getSlot() {
         return slot;
     }
 
+    /**
+     * Gets paitent.
+     *
+     * @return the paitent
+     */
     public Patient getPaitent() {
         return this.patient;
     }
+
+    /**
+     * Gets location.
+     *
+     * @return the location
+     */
     public Location getLocation() {
         return location;
     }

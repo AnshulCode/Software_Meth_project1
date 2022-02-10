@@ -2,13 +2,21 @@ package kisok;
 import java.util.Calendar;
 
 
+/**
+ * The type Date.
+ */
 public class Date implements Comparable<Date> {
     private int year;
     private int month;
     private int day;
 
 
-    // Date constructor that accepts string date input, all fields zero if string is whack
+    /**
+     * Instantiates a new Date.
+     *
+     * @param date String of date, everything set to 0 if invalid
+     */
+
     public Date(String date){
         String a[] = date.split("/");
 
@@ -19,7 +27,7 @@ public class Date implements Comparable<Date> {
             this.year = Integer.parseInt(a[2]);
             this.month = Integer.parseInt(a[0]);
             this.day = Integer.parseInt(a[1]);
-            System.out.println(this.getMonth());
+
         }catch (NumberFormatException e){
 
             this.year = 0;
@@ -35,7 +43,10 @@ public class Date implements Comparable<Date> {
 
     }
 
-    // Auto sets date top current date, default
+    /**
+     * Instantiates a new Date.
+     */
+// Auto sets date top current date, default
     public Date(){
         Calendar cal = Calendar.getInstance();
 
@@ -52,17 +63,39 @@ public class Date implements Comparable<Date> {
     // get/set methods for Day,Month, Year
 
 
+    /**
+     * Gets day.
+     *
+     * @return the day
+     */
     public int getDay() {
         return this.day;
     }
+
+    /**
+     * Gets month.
+     *
+     * @return the month
+     */
     public int getMonth() {
         return this.month;
     }
+
+    /**
+     * Gets year.
+     *
+     * @return the year
+     */
     public int getYear() {
         return this.year;
     }
 
-    //checks if year is leap year
+    /**
+     * IChecks if year is leap yearr
+     *
+     * @return the boolean
+     */
+//checks if year is leap year
     public boolean isLeapYear(){
         if(this.year % 4 == 0){
             if(this.year % 100 == 0){
@@ -76,7 +109,12 @@ public class Date implements Comparable<Date> {
 
     }
 
-    // checks if Date is valid
+    /**
+     * Is valid boolean.
+     *
+     * @return the boolean
+     */
+// checks if Date is valid
     public boolean isValid(){
         if(this.year <=0 || this.month <= 0 || this.day <= 0  || this.month>12 || this.day >31){
             return false;
@@ -90,10 +128,20 @@ public class Date implements Comparable<Date> {
 
             }
         }
+        if(this.month == 4 || this.month  == 6 || this.month == 9 || this.month == 11){
+            if(this.day>30){
+                return false;
+            }
+        }
         return true;
     }
 
-    // converts the date to days
+    /**
+     * To days int.
+     *
+     * @return the int
+     */
+// converts the date to days
     public int toDays(){
         int year = this.year;
         int month = this.month;
@@ -108,12 +156,11 @@ public class Date implements Comparable<Date> {
     @Override
     public String toString() {
         String dateStr = Integer.toString(this.month)+"/"+Integer.toString(this.day)+"/"+Integer.toString(this.year);
-
         return dateStr;
 
     }
 
-    // compareTo implementation for date returns Integer.MAX_VALUE if either date is invalid
+
     public int compareTo(Date date){
 
         if(!this.isValid() || !date.isValid()){

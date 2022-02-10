@@ -1,10 +1,18 @@
 package kisok;
 
+/**
+ * The type Time.
+ */
 public class Time implements Comparable<Time>{
     private int hour;
     private int minute;
 
-    // checks if date is valid
+    /**
+     * Is valid boolean.
+     *
+     * @return the boolean
+     */
+// checks if date is valid
     public boolean isValid(){
 
         if(hour > 24 || minute >= 60){
@@ -16,6 +24,12 @@ public class Time implements Comparable<Time>{
 
         return true;
     }
+
+    /**
+     * Instantiates a new Time.
+     *
+     * @param time the time
+     */
     public Time(String time){
         String a[] = time.split(":");
         try {
@@ -32,9 +46,20 @@ public class Time implements Comparable<Time>{
 
         }
     }
+
+    /**
+     * Instantiates a new Time.
+     */
     public Time(){
 
     }
+
+    /**
+     * Instantiates a new Time.
+     *
+     * @param hour   the hour
+     * @param minute the minute
+     */
     public Time(int hour,int minute){
         this.hour = hour;
         this.minute = minute;
@@ -42,18 +67,38 @@ public class Time implements Comparable<Time>{
 
     // get/set methods for Time Class
 
+    /**
+     * Sets hour.
+     *
+     * @param hour the hour
+     */
     public void setHour(int hour) {
         this.hour = hour;
     }
 
+    /**
+     * Sets minute.
+     *
+     * @param minute the minute
+     */
     public void setMinute(int minute) {
         this.minute = minute;
     }
 
+    /**
+     * Gets minute.
+     *
+     * @return the minute
+     */
     public int getMinute() {
         return this.minute;
     }
 
+    /**
+     * Gets hour.
+     *
+     * @return the hour
+     */
     public int getHour() {
         return this.hour;
     }

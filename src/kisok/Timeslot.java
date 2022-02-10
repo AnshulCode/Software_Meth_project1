@@ -1,15 +1,36 @@
 package kisok;
 
+/**
+ * The type Timeslot.
+ */
 public class Timeslot implements Comparable<Timeslot> {
     private Time time;
     private Date date;
+
+    /**
+     * Gets date.
+     *
+     * @return the date
+     */
     public Date getDate() {
         return this.date;
     }
+
+    /**
+     * Gets time.
+     *
+     * @return the time
+     */
     public Time getTime() {
         return this.time;
     }
 
+    /**
+     * Instantiates a new Timeslot.
+     *
+     * @param t the t
+     * @param d the d
+     */
     public Timeslot(Time t,Date d){
         this.time = t;
         this.date = d;
