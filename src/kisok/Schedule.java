@@ -322,7 +322,7 @@ public class Schedule {
                             this.appointments[j + 1] = tmp;
                             swap++;
                         }else if(name1.compareTo(name2)==0){
-                            if(this.appointments[j].getPaitent().getDob().compareTo(this.appointments[j+1].getPaitent().getDob())>0){
+                            if(this.appointments[j].getPaitent().compareTo(this.appointments[j+1].getPaitent())>0){
                                 Appointment tmp = this.appointments[j];
                                 this.appointments[j] = this.appointments[j + 1];
                                 this.appointments[j + 1] = tmp;
@@ -331,6 +331,7 @@ public class Schedule {
                         }
                     }
                 }
+
             }
             if (swap == 0) {
                 break;

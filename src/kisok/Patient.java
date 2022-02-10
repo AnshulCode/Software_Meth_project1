@@ -88,7 +88,7 @@ public class Patient implements Comparable<Patient> {
         String name1 = this.lname+this.fname;
         String name2 =  patient.lname+patient.fname;
         if(name1.compareTo(name2) != 0){
-            return name1.compareTo(name2);
+            return Integer.MAX_VALUE;
         }
 
         return this.dob.compareTo(patient.getDob());
