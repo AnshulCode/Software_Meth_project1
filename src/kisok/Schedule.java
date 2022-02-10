@@ -98,11 +98,13 @@ public class Schedule {
         }
         Date current = new Date();
         if (appt.getSlot().getDate().compareTo(current) < 0) {
+            System.out.println("Date Fallacyt");
             return false;
         }
         Time upper = new Time(9, 0);
         Time lower = new Time(16, 45);
         if (appt.getSlot().getTime().compareTo(upper) < 15 || appt.getSlot().getTime().compareTo(lower) > 0) {
+            System.out.println("Date Wrong");
             return false;
         }
 
@@ -112,17 +114,18 @@ public class Schedule {
                 if (appt.getPaitent().equals(this.appointments[i].getPaitent())) {
                     if (Integer.parseInt(this.appointments[i].getLocation().zip) == (Integer.parseInt(appt.getLocation().zip))) {
                         if (Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())) < 15) {
+                            System.out.println("15 min fault");
                             return false;
                         }
                     }else if(this.appointments[i].getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0){
+                        System.out.println("15 min fault 2");
                         return false;
                     }
                 }
                 if (Integer.parseInt(this.appointments[i].getLocation().zip) == (Integer.parseInt(appt.getLocation().zip))) {
+                    System.out.println("Compare TO" +Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())));
                     if (Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())) < 15) {
-                        return false;
-                    }
-                    if (this.appointments[i].getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0) {
+                        System.out.println("15 min fault 3");
                         return false;
                     }
                 }

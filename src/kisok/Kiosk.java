@@ -68,9 +68,7 @@ public class Kiosk {
             System.out.println(dob.toString());
 
             Date curr = new Date();
-            if(dob.compareTo(curr) >= 0){
-                return "Date Birth Invalid -> it is a future date";
-            }
+
             Date appt = new Date(appointmentDate);
             System.out.println(appt.toString());
             if(appt.compareTo(curr) <0){
