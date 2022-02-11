@@ -20,21 +20,75 @@ public class Kiosk {
 
         System.out.print("Kiosk running. Ready to process transactions\n");
         Schedule schedule = new Schedule();
-
         while(!input.equals("Q")){
             input = scan.nextLine();
-            //System.out.println("command recived" + input);
-            if(input.equals("Q")){
-                break;
+            MyArrayList cmds = new MyArrayList();
+            this.multiCommandCheck(input,cmds);
+            String[] a = cmds.getArray();
+            for (String cmd : a){
+                if(cmd != null) {
+                    if (cmd.equals("Q")) {
+                        System.out.print("Kiosk session ended");
+                        return;
+                    }
+                    System.out.println(this.commandCheck(cmd, schedule));
+                }
             }
 
-            System.out.println(commandCheck(input,schedule));
-
         }
-        System.out.print("Kiosk session ended");
+
+
+
+
+
+
+
 
     }
+    public void multiCommandCheck(String command, MyArrayList m){
+        String test = command;
+        String delimiter = " ";
+        String cmd = "";
+        int place_holder = -1;
+        String array[] = test.split(delimiter);
+        for(int i = 0; i<array.length; i++){
+            if(place_holder == 0){
+                i --;
+            }
 
+            if(array[i].equals("PP")||array[i].equals("P")|| array[i].equals("PZ") || array[i].equals("Q") ){
+                //execute command
+                m.add(array[i]);
+                cmd = "";
+            }else if(array[i].equals("B")|| array[i].equals("C") || array[i].equals("CP")){
+                cmd = cmd+ array[i] + " ";
+
+                int j = 0;
+                for(j = i+1; j<array.length; j++){
+
+                    if(array[j].equals("PP")||array[j].equals("P")|array[j].equals("B")|| array[j].equals("C") || array[j].equals("CP")|| array[j].equals("PZ")|| array[j].equals("Q") ){
+
+                        break;
+                    }
+
+                    cmd = cmd + array[j]+" ";
+
+
+                }
+                m.add(cmd);
+                if(array[j-1].equals("PP")||array[j-1].equals("PZ")||array[j-1].equals("Q")||array[j-1].equals("P") ){
+                    m.add(array[j-1]);
+                }
+                place_holder = 0;
+                i = j;
+
+
+                cmd = "";
+            }
+
+        }
+
+    }
     /**
      * This method will check to make sure the command that was inputed is a correct command.
      * If it is not correct it will give back that this command was invalid
@@ -71,12 +125,9 @@ public class Kiosk {
             Date dob = new Date(DOB);
 
             if(!dob.isValid()){
-                return "Invalid date of birth";
+                return "Date of Birth Invalid";
             }
 
-            if(!dob.isValid()){
-                return "Invalid date of birth";
-            }
             Date curr = new Date();
 
             Date appt = new Date(appointmentDate);
@@ -85,7 +136,7 @@ public class Kiosk {
             }
 
             if(appt.compareTo(curr) <0){
-                return "Appointment date invalid -> it must be a future date";
+                return "Appointment date invalid -> it is a future date";
 
             }
             Patient p = new Patient(fname,lname,DOB);
@@ -123,18 +174,16 @@ public class Kiosk {
             if(!dob.isValid()){
                 return "Invalid date of birth";
             }
-
-
-
             Date curr = new Date();
-
-
+            if(dob.compareTo(curr) >= 0){
+                return "Invalid date of birth-> it is a future date";
+            }
             Date appt = new Date(appointmentDate);
             if(!appt.isValid()){
-                return "Invalid Appointment date";
+                return "Invalid Appointment";
             }
             if(appt.compareTo(curr) <0){
-                return "Appointment date invalid -> must be a future date";
+                return "Appointment date invalid -> it is a future date";
 
             }
             Patient p = new Patient(fname,lname,DOB);
@@ -167,10 +216,10 @@ public class Kiosk {
             String lname = array[3];
             Patient p = new Patient(fname,lname,DOB);
             Appointment check = new Appointment(p);
-            if(!s.removeAll(check)){
-                return "Patient Does not exist";
+            if(s.removeAll(check)){
+                return "All appointments for  "+" "+DOB+" "+fname+" "+lname +" have been canceled";
             }
-            return "All appointments for  "+" "+DOB+" "+fname+" "+lname +" have been canceled";
+            return "Patient Does not exist";
 
         }
         if(array[0].equals("P")){
@@ -185,9 +234,8 @@ public class Kiosk {
             s.printByPatient();
             return "";
         }
+        return "";
 
-
-        return "Valid command";
     }
 
     /**
@@ -205,7 +253,6 @@ public class Kiosk {
             arrPos++;
         }
         return details;
+        }
 
     }
-}
-

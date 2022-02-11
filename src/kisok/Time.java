@@ -12,7 +12,7 @@ public class Time implements Comparable<Time>{
      *
      * @return the boolean
      */
-// checks if date is valid
+
     public boolean isValid(){
 
         if(hour > 24 || minute >= 60){
@@ -44,6 +44,10 @@ public class Time implements Comparable<Time>{
             this.hour = -1;
             this.minute = -1;
 
+        }
+        if(!this.isValid()){
+            this.hour = -1;
+            this.minute = -1;
         }
     }
 

@@ -71,20 +71,18 @@ public class Schedule {
                 }
             }
         }
-        boolean d = false;
+        boolean d = true;
         for (int i = 0; i < del.length; i++) {
             if(del[i]!= null){
                 boolean removed = this.remove(del[i]);
                 if(!removed){
-                    d = true;
+                    d = false;
                 }
             }
         }
-        if(!d){
-            return false;
-        }
 
-        return true;
+
+        return d;
     }
 
     /**
@@ -191,7 +189,7 @@ public class Schedule {
     /**
      * Prints error messages for add
      * @param appt
-     * @return
+     * @return error message
      */
      public String whyAddFailed(Appointment appt) {
          Date current = new Date();
@@ -253,29 +251,21 @@ public class Schedule {
         for (int i = 0; i < this.appointments.length; i++) {
             if (this.appointments[i] != null) {
                 System.out.println(this.appointments[i].toString());
-
             }
-
-
         }
-        System.out.print("*end of list");
+        System.out.print("*end of schedule*");
     }
 
-    /**
-     * Prints appointments by zip and Timeslot
-     */
-    public void printByZip() {
+    private void sortByZip(){
         for (int i = 0; i < this.numAppts; i++) {
             int swap = 0;
             for (int j = 0; j < this.numAppts - 1 - i; j++) {
                 if (this.appointments[j] != null && this.appointments[j + 1] != null) {
-
                     if (Integer.parseInt(this.appointments[j].getLocation().zip) > (Integer.parseInt(this.appointments[j + 1].getLocation().zip))) {
                         Appointment tmp = this.appointments[j];
                         this.appointments[j] = this.appointments[j + 1];
                         this.appointments[j + 1] = tmp;
                         swap++;
-
                     } else if (Integer.parseInt(this.appointments[j].getLocation().zip) == (Integer.parseInt(this.appointments[j + 1].getLocation().zip))) {
                         if (this.appointments[j].getSlot().compareTo(this.appointments[j + 1].getSlot()) > 0) {
                             Appointment tmp = this.appointments[j];
@@ -290,6 +280,13 @@ public class Schedule {
                 break;
             }
         }
+    }
+
+    /**
+     * Prints appointments by zip and Timeslot
+     */
+    public void printByZip() {
+        this.sortByZip();
         System.out.println("*list of appointments by zip and timeslot");
         for (int i = 0; i < this.appointments.length; i++) {
             if (this.appointments[i] != null) {
@@ -299,7 +296,7 @@ public class Schedule {
 
 
         }
-        System.out.print("*end of list");
+        System.out.print("*end of schedule.");
     }
 
     /**
@@ -343,7 +340,7 @@ public class Schedule {
 
         }
 
-        System.out.println("*list of appointments by patient*");
+        System.out.println("*list of appointments by patient.");
         for (int i = 0; i < this.appointments.length; i++) {
             if (this.appointments[i] != null) {
                 System.out.println(this.appointments[i].toString());

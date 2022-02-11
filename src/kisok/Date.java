@@ -47,7 +47,7 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Instantiates a new Date.
+     * Instantiates a new Date with current date.
      */
 // Auto sets date top current date, default
     public Date(){
@@ -170,5 +170,7 @@ public class Date implements Comparable<Date> {
         }
         return this.toDays()-date.toDays();
     }
+    private static void main(String[] args) {
 
+    }
 }

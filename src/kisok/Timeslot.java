@@ -8,7 +8,7 @@ public class Timeslot implements Comparable<Timeslot> {
     private Date date;
 
     /**
-     * Gets date.
+     * Gets date object.
      *
      * @return the date
      */
@@ -17,7 +17,7 @@ public class Timeslot implements Comparable<Timeslot> {
     }
 
     /**
-     * Gets time.
+     * Gets time object.
      *
      * @return the time
      */
@@ -28,8 +28,8 @@ public class Timeslot implements Comparable<Timeslot> {
     /**
      * Instantiates a new Timeslot.
      *
-     * @param t the t
-     * @param d the d
+     * @param t the time object
+     * @param d the date object
      */
     public Timeslot(Time t,Date d){
         this.time = t;
