@@ -2,6 +2,8 @@ package kisok;
 
 /**
  * The type Appointment.
+ *
+ * @author Anshul Prasad , Alexander Reyes
  */
 public class Appointment {
     private Patient patient;
@@ -13,39 +15,39 @@ public class Appointment {
      *
      * @param patient  the patient
      * @param slot     the slot
-     * @param location the location
+     * @param location the location in string formant, not enum
      */
 // constructor for Appointment
-    public Appointment(Patient patient,Timeslot slot,String location){
+    public Appointment(Patient patient, Timeslot slot, String location) {
 
-            if(location.equalsIgnoreCase(Location.MIDDLESEX.county)){
-                this.location = Location.MIDDLESEX;
-                this.patient = patient;
-                this.slot = slot;
+        if (location.equalsIgnoreCase(Location.MIDDLESEX.county)) {
+            this.location = Location.MIDDLESEX;
+            this.patient = patient;
+            this.slot = slot;
 
-            }else if(location.equalsIgnoreCase(Location.MERCER.county)){
-                this.location = Location.MERCER;
-                this.patient = patient;
-                this.slot = slot;
-            }else if (location.equalsIgnoreCase(Location.MORRIS.county)) {
-                this.location = Location.MORRIS;
-                this.patient = patient;
-                this.slot = slot;
-            }else if (location.equalsIgnoreCase(Location.SOMERSET.county)) {
-                this.location = Location.SOMERSET;
-                this.patient = patient;
-                this.slot = slot;
-            }else if (location.equalsIgnoreCase(Location.UNION.county)) {
-                this.location = Location.UNION;
-                this.patient = patient;
-                this.slot = slot;
-            }
+        } else if (location.equalsIgnoreCase(Location.MERCER.county)) {
+            this.location = Location.MERCER;
+            this.patient = patient;
+            this.slot = slot;
+        } else if (location.equalsIgnoreCase(Location.MORRIS.county)) {
+            this.location = Location.MORRIS;
+            this.patient = patient;
+            this.slot = slot;
+        } else if (location.equalsIgnoreCase(Location.SOMERSET.county)) {
+            this.location = Location.SOMERSET;
+            this.patient = patient;
+            this.slot = slot;
+        } else if (location.equalsIgnoreCase(Location.UNION.county)) {
+            this.location = Location.UNION;
+            this.patient = patient;
+            this.slot = slot;
+        }
     }
 
     /**
      * Instantiates a new Appointment.
      *
-     * @param patient the patient
+     * @param patient the patient,used only for removeAll method in Schedule
      */
     public Appointment(Patient patient) {
         this.patient = patient;
@@ -57,7 +59,7 @@ public class Appointment {
      * Instantiates a new Appointment.
      */
 //base constructor
-    public Appointment(){
+    public Appointment() {
 
     }
 
@@ -87,30 +89,37 @@ public class Appointment {
     public Location getLocation() {
         return location;
     }
-    @Override
-    public String toString(){
-        if(patient == null){
-            return "invalid location";
-        }
-        Date Current = new Date();
-        if(this.slot.getDate().compareTo(Current)<0){
-            return "invalid timeslot";
-        }
-        Time lower = new Time();
 
-        return patient.toString()+" Appointment detail: "+slot.toString()+" "+location.cites+" "+location.zip+","+location.county;
+
+    /**
+     * Converts Appointment to string format
+     * @return Appointment in string format
+     */
+    @Override
+    public String toString() {
+
+        return patient.toString() + " Appointment detail: " + slot.toString() + " " +
+                location.cites + " " + location.zip + "," + location.county;
     }
 
+    /**
+     * Sees if appointment are equal
+     * @param o
+     * @return True if equal , false otherwise
+     */
+
     @Override
-    public boolean equals(Object o){
-        if(o == null){
+    public boolean equals(Object o) {
+        if (o == null) {
             return false;
         }
-        if(this == o){
+        if (this == o) {
             return true;
         }
-        Appointment check = (Appointment)o;
+        Appointment check = (Appointment) o;
 
-        return (this.patient.equals(check.getPaitent()) && this.location.county.equals(check.getLocation().county) && this.slot.compareTo(check.getSlot()) == 0);
+        return (this.patient.equals(check.getPaitent()) && this.location.county.
+                equals(check.getLocation().county)
+                && this.slot.compareTo(check.getSlot()) == 0);
     }
 }

@@ -3,6 +3,8 @@ package kisok;
 
 /**
  * The type Schedule.
+ *
+ * @author Anshul Prasad , Alexander Reyes
  */
 public class Schedule {
     private Appointment[] appointments;
@@ -10,16 +12,15 @@ public class Schedule {
     private final int NOT_FOUND = -1;
 
     /**
-     * check if array is empty
+     * checks if array is empty
      *
      * @return True if empty, false otherwise
      */
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return (numAppts == 0);
     }
 
     /**
-     *
      * @param appt
      * @return index if found, -1 if not found
      */
@@ -62,10 +63,10 @@ public class Schedule {
      * @param appt the appt
      * @return boolean , True if removed All instances of Patient. False if nothing is removed
      */
-    public boolean removeAll(Appointment appt){
+    public boolean removeAll(Appointment appt) {
         Appointment[] del = new Appointment[this.appointments.length];
         for (int i = 0; i < del.length; i++) {
-            if(this.appointments[i] != null) {
+            if (this.appointments[i] != null) {
                 if (this.appointments[i].getPaitent().equals(appt.getPaitent())) {
                     del[i] = this.appointments[i];
                 }
@@ -73,9 +74,9 @@ public class Schedule {
         }
         boolean d = true;
         for (int i = 0; i < del.length; i++) {
-            if(del[i]!= null){
+            if (del[i] != null) {
                 boolean removed = this.remove(del[i]);
-                if(!removed){
+                if (!removed) {
                     d = false;
                 }
             }
@@ -105,7 +106,6 @@ public class Schedule {
         numAppts -= 1;
 
 
-
         return true;
     }
 
@@ -115,7 +115,7 @@ public class Schedule {
      * @param appt the appt
      * @return True if appointment is there, false otherwise
      */
-    public boolean isThere(Appointment appt){
+    public boolean isThere(Appointment appt) {
         for (int i = 0; i < this.numAppts; i++) {
             if (this.appointments[i] != null) {
                 if (this.appointments[i].equals(appt)) {
@@ -152,18 +152,20 @@ public class Schedule {
         for (int i = 0; i < this.appointments.length; i++) {
             if (this.appointments[i] != null) {
                 if (appt.getPaitent().equals(this.appointments[i].getPaitent())) {
-                    if (Integer.parseInt(this.appointments[i].getLocation().zip) == (Integer.parseInt(appt.getLocation().zip))) {
+                    if (Integer.parseInt(this.appointments[i].getLocation().zip) ==
+                            (Integer.parseInt(appt.getLocation().zip))) {
                         if (Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())) < 15) {
 
                             return false;
                         }
-                    }else if(this.appointments[i].getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0){
+                    } else if (this.appointments[i].getSlot().getDate().
+                            compareTo(appt.getSlot().getDate()) == 0) {
 
                         return false;
                     }
                 }
-                if (Integer.parseInt(this.appointments[i].getLocation().zip) == (Integer.parseInt(appt.getLocation().zip))) {
-                    //System.out.println("Compare TO" +Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())));
+                if (Integer.parseInt(this.appointments[i].getLocation().zip) ==
+                        (Integer.parseInt(appt.getLocation().zip))) {
                     if (Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())) < 15) {
                         return false;
                     }
@@ -187,60 +189,64 @@ public class Schedule {
     }
 
     /**
-     * Prints error messages for add
-     * @param appt
+     * Prints error messages for add in the case of a failure, empty string if sucessful
+     *
+     * @param appt the appt
      * @return error message
      */
-     public String whyAddFailed(Appointment appt) {
-         Date current = new Date();
-         if(appt.getPaitent().getDob().compareTo(current) >= 0){
-             return "Date of Birth Invalid -> it is a future date";
-         }
-         if (this.find(appt) != NOT_FOUND) {
-             return "Appointment already exists in the schedule";
-         }
+    public String whyAddFailed(Appointment appt) {
+        Date current = new Date();
+        if (appt.getPaitent().getDob().compareTo(current) >= 0) {
+            return "Date of Birth Invalid -> it is a future date";
+        }
+        if (this.find(appt) != NOT_FOUND) {
+            return "Appointment already exists in the schedule";
+        }
 
-         if (appt.getSlot().getDate().compareTo(current) < 0) {
-             return "Appointment date invalid -> must be a future date";
-         }
-         Time upper = new Time(9, 0);
-         Time lower = new Time(16, 45);
-         if (appt.getSlot().getTime().compareTo(upper) < 15 || appt.getSlot().getTime().compareTo(lower) > 0) {
+        if (appt.getSlot().getDate().compareTo(current) < 0) {
+            return "Appointment date invalid -> must be a future date";
+        }
+        Time upper = new Time(9, 0);
+        Time lower = new Time(16, 45);
+        if (appt.getSlot().getTime().compareTo(upper) < 15 || appt.getSlot().getTime().compareTo(lower) > 0) {
 
-             return "Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.";
-         }
+            return "Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.";
+        }
 
 
-         for (int i = 0; i < this.appointments.length; i++) {
-             if (this.appointments[i] != null) {
-                 if (appt.getPaitent().equals(this.appointments[i].getPaitent())) {
-                     if (Integer.parseInt(this.appointments[i].getLocation().zip) == (Integer.parseInt(appt.getLocation().zip))) {
+        for (int i = 0; i < this.appointments.length; i++) {
+            if (this.appointments[i] != null) {
+                if (appt.getPaitent().equals(this.appointments[i].getPaitent())) {
+                    if (Integer.parseInt(this.appointments[i].getLocation().zip) == (Integer.parseInt(appt.getLocation().zip))) {
 
-                         if (Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())) < 15) {
-                            if(Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot()))  == 0){
+                        if (Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())) < 15) {
+                            if (Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())) == 0) {
                                 return "Time slot has been taken at this location.";
                             }
-                             return "Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.";
-                         }
-                     } else if (this.appointments[i].getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0) {
-                         return "Same patient cannot book an appointment with the same date.";
-                     }
-                 }
-                 if (Integer.parseInt(this.appointments[i].getLocation().zip) == (Integer.parseInt(appt.getLocation().zip))) {
-                     //System.out.println("Compare TO" +Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())));
-                     if (Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())) < 15) {
-                         if(Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot()))  == 0){
-                             return "Time slot has been taken at this location.";
-                         }
-                         return "Invalid appointment time! Must enter a time between 9:00 and 16:45 with a 15-minute interval.";
-                     }
-                 }
-             }
+                            return "Invalid appointment time! Must enter a time between 9:00 and " +
+                                    "16:45 with a 15-minute interval.";
+                        }
+                    } else if (this.appointments[i].getSlot().getDate().compareTo(appt.getSlot().getDate()) == 0) {
+                        return "Same patient cannot book an appointment with the same date.";
+                    }
+                }
+                if (Integer.parseInt(this.appointments[i].getLocation().zip) ==
+                        (Integer.parseInt(appt.getLocation().zip))) {
+
+                    if (Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())) < 15) {
+                        if (Math.abs(appt.getSlot().compareTo(this.appointments[i].getSlot())) == 0) {
+                            return "Time slot has been taken at this location.";
+                        }
+                        return "Invalid appointment time! Must enter a time between 9:00 and " +
+                                "16:45 with a 15-minute interval.";
+                    }
+                }
+            }
 
 
-         }
-         return "";
-     }
+        }
+        return "";
+    }
 
 
     /**
@@ -256,17 +262,19 @@ public class Schedule {
         System.out.print("*end of schedule*");
     }
 
-    private void sortByZip(){
+    private void sortByZip() {
         for (int i = 0; i < this.numAppts; i++) {
             int swap = 0;
             for (int j = 0; j < this.numAppts - 1 - i; j++) {
                 if (this.appointments[j] != null && this.appointments[j + 1] != null) {
-                    if (Integer.parseInt(this.appointments[j].getLocation().zip) > (Integer.parseInt(this.appointments[j + 1].getLocation().zip))) {
+                    if (Integer.parseInt(this.appointments[j].getLocation().zip) >
+                            (Integer.parseInt(this.appointments[j + 1].getLocation().zip))) {
                         Appointment tmp = this.appointments[j];
                         this.appointments[j] = this.appointments[j + 1];
                         this.appointments[j + 1] = tmp;
                         swap++;
-                    } else if (Integer.parseInt(this.appointments[j].getLocation().zip) == (Integer.parseInt(this.appointments[j + 1].getLocation().zip))) {
+                    } else if (Integer.parseInt(this.appointments[j].getLocation().zip) ==
+                            (Integer.parseInt(this.appointments[j + 1].getLocation().zip))) {
                         if (this.appointments[j].getSlot().compareTo(this.appointments[j + 1].getSlot()) > 0) {
                             Appointment tmp = this.appointments[j];
                             this.appointments[j] = this.appointments[j + 1];
@@ -306,24 +314,25 @@ public class Schedule {
         for (int i = 0; i < this.numAppts; i++) {
             int swap = 0;
             for (int j = 0; j < this.numAppts - 1 - i; j++) {
-                if(!this.appointments[j].getPaitent().equals(this.appointments[j+1].getPaitent())){
+                if (!this.appointments[j].getPaitent().equals(this.appointments[j + 1].getPaitent())) {
                     String name1 = this.appointments[j].getPaitent().getLname();
-                    String name2 = this.appointments[j+1].getPaitent().getLname();
-                    if(name1.compareTo(name2)>0){
+                    String name2 = this.appointments[j + 1].getPaitent().getLname();
+                    if (name1.compareTo(name2) > 0) {
                         Appointment tmp = this.appointments[j];
                         this.appointments[j] = this.appointments[j + 1];
                         this.appointments[j + 1] = tmp;
                         swap++;
-                    }else if(name1.compareTo(name2)==0){
+                    } else if (name1.compareTo(name2) == 0) {
                         name1 = this.appointments[j].getPaitent().getFname();
-                        name2 = this.appointments[j+1].getPaitent().getFname();
-                        if(name1.compareTo(name2)>0) {
+                        name2 = this.appointments[j + 1].getPaitent().getFname();
+                        if (name1.compareTo(name2) > 0) {
                             Appointment tmp = this.appointments[j];
                             this.appointments[j] = this.appointments[j + 1];
                             this.appointments[j + 1] = tmp;
                             swap++;
-                        }else if(name1.compareTo(name2)==0){
-                            if(this.appointments[j].getPaitent().compareTo(this.appointments[j+1].getPaitent())>0){
+                        } else if (name1.compareTo(name2) == 0) {
+                            if (this.appointments[j].getPaitent().
+                                    compareTo(this.appointments[j + 1].getPaitent()) > 0) {
                                 Appointment tmp = this.appointments[j];
                                 this.appointments[j] = this.appointments[j + 1];
                                 this.appointments[j + 1] = tmp;
@@ -352,8 +361,6 @@ public class Schedule {
         System.out.print("*end of list");
 
     }
-
-
 
 
 }

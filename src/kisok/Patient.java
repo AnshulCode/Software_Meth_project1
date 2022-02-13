@@ -4,6 +4,8 @@ import java.util.Calendar;
 
 /**
  * The type Patient.
+ *
+ * @author Anshul Prasad , Alexander Reyes
  */
 public class Patient implements Comparable<Patient> {
     private String fname;
@@ -15,7 +17,7 @@ public class Patient implements Comparable<Patient> {
      *
      * @param fname the fname
      */
-    public void setFname(String fname){
+    public void setFname(String fname) {
         this.fname = fname;
     }
 
@@ -24,7 +26,7 @@ public class Patient implements Comparable<Patient> {
      *
      * @param l the l
      */
-    public void setLname(String l){
+    public void setLname(String l) {
         this.lname = l;
     }
 
@@ -35,7 +37,7 @@ public class Patient implements Comparable<Patient> {
      * @param lname the lname
      * @param dob   the date of birth in string format, creates date with date object
      */
-    public Patient(String fname,String lname,String dob){
+    public Patient(String fname, String lname, String dob) {
         this.fname = fname;
         this.lname = lname;
         this.dob = new Date(dob);
@@ -79,15 +81,15 @@ public class Patient implements Comparable<Patient> {
 
     /**
      * Converts Patient to readable format
+     *
      * @return Patient information in readable string
      */
     @Override
     public String toString() {
-        return this.fname+" "+this.lname+","+" DOB: "+this.dob.toString()+",";
+        return this.fname + " " + this.lname + "," + " DOB: " + this.dob.toString() + ",";
     }
 
     /**
-     *
      * @param patient
      * @return compare patient. If lname+fname not equal, return Integer.MAX_VALUE, else return difference of Date of birth
      */
@@ -95,9 +97,9 @@ public class Patient implements Comparable<Patient> {
     @Override
     public int compareTo(Patient patient) {
 
-        String name1 = this.lname+this.fname;
-        String name2 =  patient.lname+patient.fname;
-        if(name1.compareTo(name2) != 0){
+        String name1 = this.lname + this.fname;
+        String name2 = patient.lname + patient.fname;
+        if (name1.compareTo(name2) != 0) {
             return Integer.MAX_VALUE;
         }
 
@@ -106,21 +108,21 @@ public class Patient implements Comparable<Patient> {
     }
 
     /**
-     *
      * @param o cast as Patient
      * @return True if equal
      */
     @Override
-    public boolean equals(Object o){
-        if(o == null){
+    public boolean equals(Object o) {
+        if (o == null) {
             return false;
         }
-        if(this == o){
+        if (this == o) {
             return true;
         }
-        Patient check = (Patient)o;
+        Patient check = (Patient) o;
 
-        return (this.dob.compareTo(check.getDob()) == 0 && this.lname.equals(check.getLname()) && this.fname.equals(check.getFname()));
+        return (this.dob.compareTo(check.getDob()) == 0 && this.lname.equals(check.getLname()) &&
+                this.fname.equals(check.getFname()));
     }
 
 
